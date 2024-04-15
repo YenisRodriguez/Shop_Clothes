@@ -11,6 +11,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const getQueryParamsObj = () => {
+    var queryString = window.location.search;
+
+    queryString = queryString.substring(1);
+
+    var params = queryString.split("&");
+
+    var paramsObj = {};
+
+    params.forEach(function(parametro) {
+        var part = parametro.split("=");
+        var key = decodeURIComponent(part[0]);
+        var value = decodeURIComponent(part[1]);
+        paramsObj[key] = value;
+    });
+    return paramsObj
+  }
+
+  const setUsername = () => {
+    const paramsObj = getQueryParamsObj()
+    var username = paramsObj["username"];
+    document.getElementById('username').textContent = username
+  }
+
+  setUsername()
+
   /**
    * Sticky header on scroll
    */
